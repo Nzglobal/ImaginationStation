@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagination Station</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        play: ['Fredoka', 'cursive'],
+                    },
+                    colors: {
+                        'glass-light': 'rgba(255, 255, 255, 0.25)',
+                        'glass-dark': 'rgba(15, 23, 42, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            overflow-x: hidden;
+            user-select: none;
+            transition: background 2s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
+        }
+
+        /* Minimal Time-based Sky Gradients with contrast text variables */
+        .sky-dawn { 
+            background: linear-gradient(180deg, #2b173b 0%, #523563 40%, #c46b68 80%, #f7c59f 100%); 
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.85);
+            --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+        .sky-morning { 
+            background: linear-gradient(180deg, #4a90e2 0%, #70b0eb 50%, #b8dcfd 100%); 
+            --text-main: #0f172a;
+            --text-muted: #1e293b;
+            --text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        .sky-midday { 
+            background: linear-gradient(180deg, #3b82f6 0%, #60a5fa 50%, #a5f3fc 100%); 
+            --text-main: #0f172a;
+            --text-muted: #1e293b;
+            --text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+        }
+        .sky-sunset { 
+            background: linear-gradient(180deg, #1e293b 0%, #6b21a8 35%, #e11d48 70%, #f97316 100%); 
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.9);
+            --text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        .sky-dusk { 
+            background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 45%, #312e81 80%, #4c1d95 100%); 
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.85);
+            --text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        .sky-night { 
+            background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e1b4b 100%); 
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.8);
+            --text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Applied Dynamic High Contrast Text */
+        .dynamic-text-main {
+            color: var(--text-main) !important;
+            text-shadow: var(--text-shadow);
+        }
+
+        .dynamic-text-muted {
+            color: var(--text-muted) !important;
+            text-shadow: var(--text-shadow);
+        }
+
+        /* Glass Backdrop for Title Badge */
+        .glass-header-badge {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        .sky-dark .glass-header-badge {
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Subtle Minimal Glass Panels */
+        .glass-clean {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+        .sky-dark .glass-clean {
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .sky-dark .glass-card {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Iframe Scaler Preview */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .iframe-scaler {
+            width: 400%;
+            height: 400%;
+            transform: scale(0.25);
+            transform-origin: top left;
+            border: none;
+        }
+
+        /* Toy Train Animations & Layout Fixes */
+        @keyframes chugTrain {
+            0% { transform: translateX(-160px); }
+            100% { transform: translateX(calc(100vw + 160px)); }
+        }
+
+        @keyframes steamPuff {
+            0% { transform: translate(0, 0) scale(0.3); opacity: 0.85; }
+            100% { transform: translate(-25px, -32px) scale(1.5); opacity: 0; }
+        }
+
+        /* Padded container for Train so smoke puffs never get cut off at top */
+        .train-track-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 36px; /* High top clearance for smoke puffs */
+            padding-bottom: 2px;
+        }
+
+        .train-track {
+            position: relative;
+            width: 100%;
+            height: 20px;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.4);
+        }
+
+        .toy-train-container {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            animation: chugTrain 28s linear infinite;
+            cursor: pointer;
+            z-index: 30;
+        }
+
+        .steam-bubble {
+            position: absolute;
+            top: -2px;
+            left: 80px;
+            width: 11px;
+            height: 11px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 50%;
+            animation: steamPuff 1.5s ease-out infinite;
+            pointer-events: none;
+        }
+
+        .steam-bubble-2 {
+            animation-delay: 0.45s;
+            left: 84px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.35); border-radius: 10px; }
+    </style>
+</head>
+<body class="sky-morning font-sans min-h-screen transition-colors duration-1000 relative flex flex-col">
+
+    <!-- TOP TOY TRAIN TRACK & ANIMATION (PADDED TO PREVENT CLIPPING) -->
+    <div class="w-full overflow-hidden z-20 train-track-wrapper">
+        <div class="train-track">
+            <div id="toyTrain" class="toy-train-container flex items-center gap-1 group" title="Click for Choo-Choo!">
+                <!-- Steam Puffs -->
+                <div class="steam-bubble"></div>
+                <div class="steam-bubble steam-bubble-2"></div>
+
+                <!-- Toy Engine & Cars (SVG) -->
+                <svg width="110" height="34" viewBox="0 0 110 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-md transition-transform group-hover:scale-105">
+                    <!-- Locomotive Engine -->
+                    <rect x="55" y="10" width="35" height="18" rx="3" fill="#f43f5e" />
+                    <rect x="75" y="4" width="18" height="24" rx="3" fill="#3b82f6" />
+                    <rect x="60" y="2" width="6" height="8" fill="#eab308" />
+                    <circle cx="84" cy="11" r="4" fill="#fbbf24" />
+                    <rect x="90" y="14" width="6" height="14" fill="#10b981" />
+                    <!-- Wheels -->
+                    <circle cx="63" cy="28" r="4" fill="#1e293b" />
+                    <circle cx="75" cy="28" r="4" fill="#1e293b" />
+                    <circle cx="87" cy="28" r="4" fill="#1e293b" />
+                    
+                    <!-- Wagon 1 -->
+                    <rect x="28" y="14" width="22" height="14" rx="2" fill="#8b5cf6" />
+                    <circle cx="33" cy="28" r="3.5" fill="#1e293b" />
+                    <circle cx="45" cy="28" r="3.5" fill="#1e293b" />
+                    <path d="M 50 21 L 55 21" stroke="#94a3b8" stroke-width="2" />
+
+                    <!-- Wagon 2 -->
+                    <rect x="2" y="14" width="22" height="14" rx="2" fill="#10b981" />
+                    <circle cx="7" cy="28" r="3.5" fill="#1e293b" />
+                    <circle cx="19" cy="28" r="3.5" fill="#1e293b" />
+                    <path d="M 24 21 L 28 21" stroke="#94a3b8" stroke-width="2" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP WRAPPER -->
+    <div class="relative z-10 flex flex-col flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- HEADER WITH DYNAMIC HIGH-CONTRAST TEXT & GLASS BACKDROP -->
+        <header class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+            <div class="glass-header-badge px-5 py-3 rounded-2xl flex items-center gap-3.5 text-center sm:text-left transition-colors duration-500">
+                <div id="trainLogo" class="w-11 h-11 rounded-xl bg-white/30 dark:bg-slate-800/40 flex items-center justify-center text-indigo-600 dark:text-indigo-300 text-xl shadow-sm cursor-pointer hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-train"></i>
+                </div>
+                <div>
+                    <h1 class="font-play text-2xl sm:text-3xl font-bold tracking-wide dynamic-text-main">
+                        Imagination Station
+                    </h1>
+                    <p class="text-xs font-semibold dynamic-text-muted" id="timeGreeting">
+                        Welcome to your playground of canvases
+                    </p>
+                </div>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center gap-2">
+                <button id="addCanvasBtn" class="px-4 py-2.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold text-xs shadow-md hover:opacity-90 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>New Canvas</span>
+                </button>
+                <button id="exportBtn" class="p-2.5 rounded-2xl glass-clean hover:bg-white/40 dark:hover:bg-slate-800/60 transition-all text-xs dynamic-text-main" title="Export / Import">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- SUBDUE & MINIMAL SEARCH / TAG FILTER TOOLBAR -->
+        <section class="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6">
+            <!-- Sleek Unobtrusive Search Trigger Input -->
+            <div class="relative w-full sm:w-64">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-xs opacity-60 dynamic-text-main"></i>
+                <input type="text" id="searchInput" placeholder="Search pages..." class="w-full pl-9 pr-3 py-1.5 rounded-xl bg-white/20 dark:bg-slate-900/20 border border-white/30 dark:border-slate-700/30 text-xs focus:outline-none focus:bg-white/40 dark:focus:bg-slate-900/40 transition-all placeholder-slate-700 dark:placeholder-slate-300 font-medium dynamic-text-main">
+            </div>
+
+            <!-- Minimal Pill Tags -->
+            <div id="tagFilterContainer" class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto py-1 scrollbar-none">
+                <!-- Tags dynamically rendered here -->
+            </div>
+        </section>
+
+        <!-- CARDS DISPLAY GRID -->
+        <main id="cardsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 flex-1 mb-10">
+            <!-- Dynamic Canvas Cards injected here -->
+        </main>
+
+        <!-- EMPTY STATE -->
+        <div id="emptyState" class="hidden flex-col items-center justify-center py-16 text-center glass-clean rounded-3xl">
+            <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-500 text-2xl mb-3">
+                <i class="fa-solid fa-cubes"></i>
+            </div>
+            <h3 class="font-play text-lg font-bold mb-1 dynamic-text-main">Your Station is Clear</h3>
+            <p class="text-xs font-medium max-w-xs mb-5 dynamic-text-muted">Start by adding a new interactive HTML snippet or creative canvas page.</p>
+            <button id="emptyAddBtn" class="px-4 py-2 rounded-xl bg-indigo-600 text-white font-medium text-xs shadow-sm hover:bg-indigo-500 transition-all">
+                Add Canvas
+            </button>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="mt-auto py-4 text-center text-[11px] font-semibold opacity-80 flex items-center justify-between border-t border-white/20 dark:border-slate-800 dynamic-text-muted">
+            <span>Imagination Station</span>
+            <button id="resetSamplesBtn" class="hover:underline opacity-90">Restore Starter Canvases</button>
+        </footer>
+    </div>
+
+    <!-- FULLSCREEN INTERACTIVE VIEWPORT MODAL -->
+    <div id="viewportModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xl hidden flex-col transition-all duration-300 opacity-0 scale-95">
+        <!-- Viewport Header -->
+        <div class="flex items-center justify-between px-5 py-3 bg-slate-900 border-b border-slate-800 text-white">
+            <div class="flex items-center gap-3">
+                <button id="modalCloseBtn" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all text-sm flex items-center gap-2 px-3">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="text-xs font-semibold">Back</span>
+                </button>
+                <div>
+                    <h2 id="modalTitle" class="font-play font-bold text-sm leading-tight">Canvas Viewport</h2>
+                    <span id="modalTags" class="text-[10px] text-indigo-400">#tag</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button id="modalPrevBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="modalNextBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs" title="Next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button id="modalExternalBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs ml-2" title="Open External"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+            </div>
+        </div>
+
+        <!-- Fullscreen Frame -->
+        <div class="flex-1 w-full h-full relative bg-white">
+            <iframe id="modalIframe" class="w-full h-full border-none" sandbox="allow-scripts allow-same-origin allow-forms allow-modals"></iframe>
+        </div>
+    </div>
+
+    <!-- ADD / EDIT CANVAS MODAL -->
+    <div id="addModal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-clean bg-white/95 dark:bg-slate-900/95 rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-white/40 dark:border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+                <h3 id="modalHeading" class="font-play text-lg font-bold">Add Web Canvas</h3>
+                <button id="closeAddModalBtn" class="text-slate-400 hover:text-slate-600 text-base"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <form id="addSiteForm" class="space-y-4">
+                <input type="hidden" id="editSiteId" value="">
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 text-slate-500">Title</label>
+                    <input type="text" id="inputTitle" required placeholder="e.g., Kinetic Particle Toy" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 text-slate-500">Tags (comma separated)</label>
+                    <input type="text" id="inputTags" placeholder="Art, Game, Sound" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 text-slate-500">HTML Code Snippet</label>
+                    <textarea id="inputCode" rows="6" placeholder="<!DOCTYPE html>&#10;<html>&#10;<body>&#10;  <h1>Hello World</h1>&#10;</body>&#10;</html>" class="w-full p-3 font-mono text-xs rounded-xl bg-slate-950 text-emerald-400 border border-slate-800 focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                </div>
+
+                <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
+                    <button type="button" id="cancelAddBtn" class="px-4 py-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 text-xs font-semibold">Cancel</button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs shadow-md">Save Canvas</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- BACKUP / RESTORE MODAL -->
+    <div id="backupModal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-clean bg-white/95 dark:bg-slate-900/95 rounded-3xl p-6 max-w-sm w-full shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-play text-base font-bold">Data Management</h3>
+                <button id="closeBackupBtn" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3">
+                <button id="exportJsonBtn" class="w-full py-2.5 rounded-xl bg-indigo-600 text-white font-medium text-xs flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-download"></i> Export JSON
+                </button>
+                <input type="file" id="importJsonInput" accept=".json" class="hidden">
+                <button id="triggerImportBtn" class="w-full py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-xs font-medium flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-upload"></i> Restore JSON File
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        /**
+         * Imagination Station - Main Logic
+         */
+
+        // Web Audio Whistle & Chug Sound Effects
+        class TrainAudioEngine {
+            constructor() { this.ctx = null; }
+            init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); }
+            
+            playWhistle() {
+                try {
+                    this.init();
+                    const now = this.ctx.currentTime;
+                    // Dual pitch train whistle
+                    [587.33, 739.99].forEach(freq => {
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now);
+                        gain.gain.setValueAtTime(0.08, now);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+                        osc.connect(gain);
+                        gain.connect(this.ctx.destination);
+                        osc.start(now);
+                        osc.stop(now + 0.61);
+                    });
+                } catch(e) {}
+            }
+
+            playPop() {
+                try {
+                    this.init();
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.05);
+                    gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.06);
+                } catch(e) {}
+            }
+        }
+
+        const audio = new TrainAudioEngine();
+
+        // Sample Starter Interactive Pages
+        const STARTER_CANVASES = [
+            {
+                id: 'canvas-1',
+                title: 'Kinetic Particle Toy',
+                tags: ['Art', 'Physics'],
+                code: `<!DOCTYPE html><html><body class="m-0 bg-slate-950 overflow-hidden"><canvas id="c"></canvas><script>const c=document.getElementById("c"),x=c.getContext("2d");let p=[];function r(){c.width=window.innerWidth;c.height=window.innerHeight}window.onresize=r;r();window.onmousemove=e=>{for(let i=0;i<4;i++)p.push({x:e.clientX,y:e.clientY,vx:(Math.random()-0.5)*5,vy:(Math.random()-0.5)*5,s:Math.random()*6+2,c:\`hsl(\${Math.random()*360},100%,70%)\`,l:1})};function a(){x.fillStyle="rgba(2,6,23,0.15)";x.fillRect(0,0,c.width,c.height);p.forEach((o,i)=>{o.x+=o.vx;o.y+=o.vy;o.l-=0.02;x.beginPath();x.arc(o.x,o.y,Math.max(0,o.s*o.l),0,Math.PI*2);x.fillStyle=o.c;x.fill();if(o.l<=0)p.splice(i,1)});requestAnimationFrame(a)}a();<\/script></body></html>`,
+                dateAdded: 'Starter'
+            },
+            {
+                id: 'canvas-2',
+                title: 'Pentatonic Music Matrix',
+                tags: ['Sound', 'Interactive'],
+                code: `<!DOCTYPE html><html><head><script src="https://cdn.tailwindcss.com"><\/script></head><body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-4"><div class="grid grid-cols-4 gap-2.5 p-4 bg-slate-800 rounded-2xl shadow-2xl" id="g"></div><script>const f=[261.6,293.6,329.6,392,440,523.2,587.3,659.2,783.9,880,1046.5,1174.6];const ctx=new(window.AudioContext||window.webkitAudioContext)();f.forEach(n=>{const b=document.createElement("button");b.className="w-12 h-12 rounded-xl bg-indigo-600/40 hover:bg-indigo-500 transition-all active:scale-90 border border-indigo-400/30";b.onclick=()=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=n;g.gain.setValueAtTime(0.2,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.6);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.61);};document.getElementById("g").appendChild(b);});<\/script></body></html>`,
+                dateAdded: 'Starter'
+            },
+            {
+                id: 'canvas-3',
+                title: 'Zen Ripple Pond',
+                tags: ['Zen', 'Relax'],
+                code: `<!DOCTYPE html><html><body class="m-0 bg-teal-950 overflow-hidden"><canvas id="c"></canvas><script>const c=document.getElementById("c"),x=c.getContext("2d");let r=[];function resize(){c.width=window.innerWidth;c.height=window.innerHeight}window.onresize=resize;resize();window.onclick=e=>{r.push({x:e.clientX,y:e.clientY,rad:0,a:1})};function draw(){x.fillStyle="#042f2e";x.fillRect(0,0,c.width,c.height);r.forEach((p,i)=>{p.rad+=1.8;p.a-=0.012;x.beginPath();x.arc(p.x,p.y,p.rad,0,Math.PI*2);x.strokeStyle=\`rgba(153,246,228,\${p.a})\`;x.lineWidth=2;x.stroke();if(p.a<=0)r.splice(i,1)});requestAnimationFrame(draw)}draw();<\/script></body></html>`,
+                dateAdded: 'Starter'
+            },
+        ];
+
+        // State Store
+        let state = {
+            websites: [],
+            selectedTag: 'ALL',
+            searchQuery: '',
+            activeViewportIndex: -1
+        };
+
+        // DOM Elements
+        const DOM = {
+            cardsContainer: document.getElementById('cardsContainer'),
+            emptyState: document.getElementById('emptyState'),
+            searchInput: document.getElementById('searchInput'),
+            tagFilterContainer: document.getElementById('tagFilterContainer'),
+            timeGreeting: document.getElementById('timeGreeting'),
+            toyTrain: document.getElementById('toyTrain'),
+            trainLogo: document.getElementById('trainLogo'),
+            // Viewport
+            viewportModal: document.getElementById('viewportModal'),
+            modalIframe: document.getElementById('modalIframe'),
+            modalTitle: document.getElementById('modalTitle'),
+            modalTags: document.getElementById('modalTags'),
+            modalCloseBtn: document.getElementById('modalCloseBtn'),
+            modalPrevBtn: document.getElementById('modalPrevBtn'),
+            modalNextBtn: document.getElementById('modalNextBtn'),
+            modalExternalBtn: document.getElementById('modalExternalBtn'),
+            // Add/Edit
+            addModal: document.getElementById('addModal'),
+            addCanvasBtn: document.getElementById('addCanvasBtn'),
+            emptyAddBtn: document.getElementById('emptyAddBtn'),
+            closeAddModalBtn: document.getElementById('closeAddModalBtn'),
+            cancelAddBtn: document.getElementById('cancelAddBtn'),
+            addSiteForm: document.getElementById('addSiteForm'),
+            inputTitle: document.getElementById('inputTitle'),
+            inputTags: document.getElementById('inputTags'),
+            inputCode: document.getElementById('inputCode'),
+            // Backup
+            exportBtn: document.getElementById('exportBtn'),
+            backupModal: document.getElementById('backupModal'),
+            closeBackupBtn: document.getElementById('closeBackupBtn'),
+            exportJsonBtn: document.getElementById('exportJsonBtn'),
+            triggerImportBtn: document.getElementById('triggerImportBtn'),
+            importJsonInput: document.getElementById('importJsonInput'),
+            resetSamplesBtn: document.getElementById('resetSamplesBtn')
+        };
+
+        // --- TIME GRADIENT UPDATER ---
+        function updateTimeSky() {
+            const now = new Date();
+            const hours = now.getHours();
+            const body = document.body;
+
+            body.classList.remove('sky-dawn', 'sky-morning', 'sky-midday', 'sky-sunset', 'sky-dusk', 'sky-night', 'sky-dark');
+
+            let greeting = '';
+            if (hours >= 5 && hours < 8) {
+                body.classList.add('sky-dawn');
+                greeting = 'Good dawn, time to create';
+            } else if (hours >= 8 && hours < 12) {
+                body.classList.add('sky-morning');
+                greeting = 'Good morning, playground is ready';
+            } else if (hours >= 12 && hours < 17) {
+                body.classList.add('sky-midday');
+                greeting = 'Bright afternoon for ideas';
+            } else if (hours >= 17 && hours < 20) {
+                body.classList.add('sky-sunset');
+                greeting = 'Golden hour of imagination';
+            } else if (hours >= 20 && hours < 22) {
+                body.classList.add('sky-dusk', 'sky-dark');
+                greeting = 'Peaceful evening sanctuary';
+            } else {
+                body.classList.add('sky-night', 'sky-dark');
+                greeting = 'Night time spark of magic';
+            }
+
+            DOM.timeGreeting.textContent = greeting;
+        }
+
+        // --- STORAGE ---
+        function loadStorage() {
+            const saved = localStorage.getItem('imagination_station_canvases');
+            if (saved) {
+                try { state.websites = JSON.parse(saved); }
+                catch(e) { state.websites = [...STARTER_CANVASES]; }
+            } else {
+                state.websites = [...STARTER_CANVASES];
+                saveStorage();
+            }
+        }
+
+        function saveStorage() {
+            localStorage.setItem('imagination_station_canvases', JSON.stringify(state.websites));
+            render();
+        }
+
+        // --- RENDER ---
+        function render() {
+            renderTags();
+            renderCards();
+        }
+
+        function renderTags() {
+            const allTags = new Set(['ALL']);
+            state.websites.forEach(site => site.tags?.forEach(t => allTags.add(t.toUpperCase())));
+
+            DOM.tagFilterContainer.innerHTML = '';
+            allTags.forEach(tag => {
+                const isSelected = state.selectedTag === tag;
+                const btn = document.createElement('button');
+                btn.className = `px-2.5 py-1 rounded-lg text-[11px] font-medium whitespace-nowrap transition-all ${
+                    isSelected 
+                        ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-xs' 
+                        : 'bg-white/20 dark:bg-slate-800/30 hover:bg-white/40'
+                }`;
+                btn.textContent = tag === 'ALL' ? 'All' : `#${tag.toLowerCase()}`;
+                btn.onclick = () => {
+                    audio.playPop();
+                    state.selectedTag = tag;
+                    render();
+                };
+                DOM.tagFilterContainer.appendChild(btn);
+            });
+        }
+
+        function getFilteredWebsites() {
+            return state.websites.filter(site => {
+                const matchesTag = state.selectedTag === 'ALL' || site.tags?.some(t => t.toUpperCase() === state.selectedTag);
+                const matchesSearch = !state.searchQuery || 
+                    site.title.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                    site.tags?.some(t => t.toLowerCase().includes(state.searchQuery.toLowerCase()));
+                return matchesTag && matchesSearch;
+            });
+        }
+
+        function renderCards() {
+            const filtered = getFilteredWebsites();
+            DOM.cardsContainer.innerHTML = '';
+
+            if (filtered.length === 0) {
+                DOM.cardsContainer.classList.add('hidden');
+                DOM.emptyState.classList.remove('hidden');
+                DOM.emptyState.classList.add('flex');
+                return;
+            }
+
+            DOM.cardsContainer.classList.remove('hidden');
+            DOM.emptyState.classList.add('hidden');
+            DOM.emptyState.classList.remove('flex');
+
+            filtered.forEach((site, index) => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer relative shadow-sm";
+                
+                const iframeSrc = `data:text/html;charset=utf-8,${encodeURIComponent(site.code || '')}`;
+
+                card.innerHTML = `
+                    <div class="h-40 w-full bg-slate-900/40 relative overflow-hidden border-b border-white/20 dark:border-slate-800">
+                        <div class="iframe-container">
+                            <iframe class="iframe-scaler" src="${iframeSrc}" loading="lazy"></iframe>
+                        </div>
+                        <div class="absolute inset-0 bg-transparent group-hover:bg-indigo-500/10 transition-colors"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/30 backdrop-blur-xs">
+                            <span class="px-3 py-1.5 rounded-xl bg-white text-slate-900 font-bold text-xs shadow-md">
+                                Launch Canvas
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 flex flex-col flex-1 justify-between">
+                        <div>
+                            <div class="flex items-start justify-between gap-2 mb-1">
+                                <h3 class="font-play font-bold text-sm line-clamp-1">${escapeHTML(site.title)}</h3>
+                                <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="delete-btn p-1 text-slate-400 hover:text-red-500 text-xs" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1 mb-2">
+                                ${(site.tags || []).map(t => `<span class="px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 font-medium text-[10px]">#${escapeHTML(t)}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                card.onclick = (e) => {
+                    if (e.target.closest('.delete-btn')) {
+                        e.stopPropagation();
+                        deleteSite(site.id);
+                        return;
+                    }
+                    openViewport(index);
+                };
+
+                DOM.cardsContainer.appendChild(card);
+            });
+        }
+
+        // --- FULLSCREEN VIEWPORT ENGINE ---
+        function openViewport(filteredIndex) {
+            const filtered = getFilteredWebsites();
+            if (!filtered[filteredIndex]) return;
+
+            state.activeViewportIndex = filteredIndex;
+            const site = filtered[filteredIndex];
+
+            audio.playPop();
+
+            DOM.modalTitle.textContent = site.title;
+            DOM.modalTags.textContent = (site.tags || []).map(t => `#${t}`).join(' ');
+
+            DOM.modalIframe.srcdoc = site.code;
+
+            DOM.viewportModal.classList.remove('hidden');
+            setTimeout(() => {
+                DOM.viewportModal.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        }
+
+        function closeViewport() {
+            audio.playPop();
+            DOM.viewportModal.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                DOM.viewportModal.classList.add('hidden');
+                DOM.modalIframe.srcdoc = '';
+            }, 250);
+        }
+
+        function navigateViewport(dir) {
+            const filtered = getFilteredWebsites();
+            let newIdx = state.activeViewportIndex + dir;
+            if (newIdx < 0) newIdx = filtered.length - 1;
+            if (newIdx >= filtered.length) newIdx = 0;
+            openViewport(newIdx);
+        }
+
+        // --- MODAL & FORM HANDLERS ---
+        function openAddModal() {
+            audio.playPop();
+            document.getElementById('editSiteId').value = '';
+            DOM.inputTitle.value = '';
+            DOM.inputTags.value = '';
+            DOM.inputCode.value = '';
+            DOM.addModal.classList.remove('hidden');
+            DOM.addModal.classList.add('flex');
+        }
+
+        function closeAddModal() {
+            DOM.addModal.classList.add('hidden');
+            DOM.addModal.classList.remove('flex');
+        }
+
+        function saveSiteForm(e) {
+            e.preventDefault();
+            const title = DOM.inputTitle.value.trim();
+            const tags = DOM.inputTags.value.split(',').map(t => t.trim()).filter(Boolean);
+            const code = DOM.inputCode.value.trim();
+
+            if (!code) {
+                alert('Please enter HTML code.');
+                return;
+            }
+
+            const newSite = {
+                id: 'canvas-' + Date.now(),
+                title,
+                tags,
+                code,
+                dateAdded: new Date().toLocaleDateString()
+            };
+
+            state.websites.unshift(newSite);
+            saveStorage();
+            closeAddModal();
+        }
+
+        function deleteSite(id) {
+            if (confirm('Remove this canvas from Imagination Station?')) {
+                audio.playPop();
+                state.websites = state.websites.filter(s => s.id !== id);
+                saveStorage();
+            }
+        }
+
+        function escapeHTML(str) {
+            return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
+        }
+
+        // --- INITIALIZATION & EVENTS ---
+        window.onload = function() {
+            updateTimeSky();
+            loadStorage();
+
+            // Train Choo-Choo Click
+            DOM.toyTrain.onclick = () => audio.playWhistle();
+            DOM.trainLogo.onclick = () => audio.playWhistle();
+
+            // Search
+            DOM.searchInput.oninput = (e) => {
+                state.searchQuery = e.target.value;
+                renderCards();
+            };
+
+            // Buttons & Modal Actions
+            DOM.addCanvasBtn.onclick = openAddModal;
+            DOM.emptyAddBtn.onclick = openAddModal;
+            DOM.closeAddModalBtn.onclick = closeAddModal;
+            DOM.cancelAddBtn.onclick = closeAddModal;
+            DOM.addSiteForm.onsubmit = saveSiteForm;
+
+            DOM.modalCloseBtn.onclick = closeViewport;
+            DOM.modalPrevBtn.onclick = () => navigateViewport(-1);
+            DOM.modalNextBtn.onclick = () => navigateViewport(1);
+            DOM.modalExternalBtn.onclick = () => {
+                const filtered = getFilteredWebsites();
+                const site = filtered[state.activeViewportIndex];
+                if (site) {
+                    const blob = new Blob([site.code || ''], { type: 'text/html' });
+                    window.open(URL.createObjectURL(blob), '_blank');
+                }
+            };
+
+            // Backup Modal
+            DOM.exportBtn.onclick = () => {
+                DOM.backupModal.classList.remove('hidden');
+                DOM.backupModal.classList.add('flex');
+            };
+            DOM.closeBackupBtn.onclick = () => {
+                DOM.backupModal.classList.add('hidden');
+                DOM.backupModal.classList.remove('flex');
+            };
+            DOM.exportJsonBtn.onclick = () => {
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state.websites, null, 2));
+                const a = document.createElement('a');
+                a.href = dataStr;
+                a.download = `Imagination_Station_Backup.json`;
+                a.click();
+            };
+            DOM.triggerImportBtn.onclick = () => DOM.importJsonInput.click();
+            DOM.importJsonInput.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        state.websites = JSON.parse(event.target.result);
+                        saveStorage();
+                        DOM.backupModal.classList.add('hidden');
+                    } catch(err) { alert('Invalid file'); }
+                };
+                reader.readAsText(file);
+            };
+
+            DOM.resetSamplesBtn.onclick = () => {
+                if (confirm('Restore starter canvases?')) {
+                    localStorage.removeItem('imagination_station_canvases');
+                    loadStorage();
+                }
+            };
+
+            // Keyboard Shortcuts
+            window.onkeydown = (e) => {
+                if (!DOM.viewportModal.classList.contains('hidden')) {
+                    if (e.key === 'Escape') closeViewport();
+                    if (e.key === 'ArrowRight') navigateViewport(1);
+                    if (e.key === 'ArrowLeft') navigateViewport(-1);
+                }
+            };
+        };
+    </script>
+</body>
+</html>
