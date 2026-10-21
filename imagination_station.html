@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -20,10 +20,6 @@
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
                         play: ['Fredoka', 'cursive'],
-                    },
-                    colors: {
-                        'glass-light': 'rgba(255, 255, 255, 0.25)',
-                        'glass-dark': 'rgba(15, 23, 42, 0.4)',
                     }
                 }
             }
@@ -36,98 +32,116 @@
             transition: background 2s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
         }
 
-        /* Minimal Time-based Sky Gradients with contrast text variables */
+        /* Time-based Sky Gradients & Dynamic CSS Contrast Variables */
         .sky-dawn { 
-            background: linear-gradient(180deg, #2b173b 0%, #523563 40%, #c46b68 80%, #f7c59f 100%); 
-            --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.85);
-            --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(180deg, #1e112a 0%, #3b1f48 40%, #8f4059 80%, #d99672 100%); 
+            --txt-main: #ffffff;
+            --txt-muted: #f1f5f9;
+            --txt-sub: #cbd5e1;
+            --badge-bg: rgba(15, 23, 42, 0.65);
+            --badge-border: rgba(255, 255, 255, 0.2);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.18);
+            --input-bg: rgba(15, 23, 42, 0.6);
         }
         .sky-morning { 
-            background: linear-gradient(180deg, #4a90e2 0%, #70b0eb 50%, #b8dcfd 100%); 
-            --text-main: #0f172a;
-            --text-muted: #1e293b;
-            --text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+            background: linear-gradient(180deg, #3b82f6 0%, #60a5fa 50%, #bae6fd 100%); 
+            --txt-main: #0f172a;
+            --txt-muted: #1e293b;
+            --txt-sub: #334155;
+            --badge-bg: rgba(255, 255, 255, 0.85);
+            --badge-border: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.82);
+            --card-border: rgba(255, 255, 255, 0.95);
+            --input-bg: rgba(255, 255, 255, 0.9);
         }
         .sky-midday { 
-            background: linear-gradient(180deg, #3b82f6 0%, #60a5fa 50%, #a5f3fc 100%); 
-            --text-main: #0f172a;
-            --text-muted: #1e293b;
-            --text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+            background: linear-gradient(180deg, #2563eb 0%, #38bdf8 50%, #a5f3fc 100%); 
+            --txt-main: #0f172a;
+            --txt-muted: #1e293b;
+            --txt-sub: #334155;
+            --badge-bg: rgba(255, 255, 255, 0.88);
+            --badge-border: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(255, 255, 255, 0.95);
+            --input-bg: rgba(255, 255, 255, 0.9);
         }
         .sky-sunset { 
-            background: linear-gradient(180deg, #1e293b 0%, #6b21a8 35%, #e11d48 70%, #f97316 100%); 
-            --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.9);
-            --text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(180deg, #0f172a 0%, #581c87 35%, #9f1239 70%, #ea580c 100%); 
+            --txt-main: #ffffff;
+            --txt-muted: #f8fafc;
+            --txt-sub: #e2e8f0;
+            --badge-bg: rgba(15, 23, 42, 0.7);
+            --badge-border: rgba(255, 255, 255, 0.25);
+            --card-bg: rgba(30, 41, 59, 0.75);
+            --card-border: rgba(255, 255, 255, 0.2);
+            --input-bg: rgba(15, 23, 42, 0.65);
         }
         .sky-dusk { 
-            background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 45%, #312e81 80%, #4c1d95 100%); 
-            --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.85);
-            --text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(180deg, #020617 0%, #1e1b4b 45%, #312e81 80%, #4c1d95 100%); 
+            --txt-main: #ffffff;
+            --txt-muted: #f1f5f9;
+            --txt-sub: #cbd5e1;
+            --badge-bg: rgba(15, 23, 42, 0.75);
+            --badge-border: rgba(255, 255, 255, 0.2);
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --card-border: rgba(255, 255, 255, 0.18);
+            --input-bg: rgba(15, 23, 42, 0.7);
         }
         .sky-night { 
-            background: linear-gradient(180deg, #020617 0%, #0f172a 50%, #1e1b4b 100%); 
-            --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.8);
-            --text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(180deg, #020617 0%, #090d16 50%, #111827 100%); 
+            --txt-main: #ffffff;
+            --txt-muted: #f1f5f9;
+            --txt-sub: #94a3b8;
+            --badge-bg: rgba(15, 23, 42, 0.82);
+            --badge-border: rgba(255, 255, 255, 0.15);
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --input-bg: rgba(15, 23, 42, 0.75);
         }
 
-        /* Applied Dynamic High Contrast Text */
-        .dynamic-text-main {
-            color: var(--text-main) !important;
-            text-shadow: var(--text-shadow);
-        }
+        /* High-Contrast Dynamic Typography Rules */
+        .dynamic-text-main { color: var(--txt-main) !important; }
+        .dynamic-text-muted { color: var(--txt-muted) !important; }
+        .dynamic-text-sub { color: var(--txt-sub) !important; }
 
-        .dynamic-text-muted {
-            color: var(--text-muted) !important;
-            text-shadow: var(--text-shadow);
-        }
-
-        /* Glass Backdrop for Title Badge */
+        /* Solid Glass Protection Capsules (ensures legibility over gradients) */
         .glass-header-badge {
-            background: rgba(255, 255, 255, 0.18);
+            background: var(--badge-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--badge-border);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12);
+        }
+
+        .glass-pill-container {
+            background: var(--badge-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-        .sky-dark .glass-header-badge {
-            background: rgba(15, 23, 42, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        /* Subtle Minimal Glass Panels */
-        .glass-clean {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.35);
-        }
-        .sky-dark .glass-clean {
-            background: rgba(15, 23, 42, 0.55);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--badge-border);
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.45);
-            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .sky-dark .glass-card {
-            background: rgba(30, 41, 59, 0.55);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .glass-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2);
         }
 
-        /* Iframe Scaler Preview */
+        .glass-input {
+            background: var(--input-bg) !important;
+            color: var(--txt-main) !important;
+            border: 1px solid var(--badge-border) !important;
+        }
+
+        /* Scaled Iframe Viewport Container */
         .iframe-container {
             position: relative;
             width: 100%;
@@ -142,32 +156,32 @@
             transform: scale(0.25);
             transform-origin: top left;
             border: none;
+            background: #ffffff;
         }
 
-        /* Toy Train Animations & Layout Fixes */
+        /* Toy Train Animations & Bounds */
         @keyframes chugTrain {
             0% { transform: translateX(-160px); }
             100% { transform: translateX(calc(100vw + 160px)); }
         }
 
         @keyframes steamPuff {
-            0% { transform: translate(0, 0) scale(0.3); opacity: 0.85; }
-            100% { transform: translate(-25px, -32px) scale(1.5); opacity: 0; }
+            0% { transform: translate(0, 0) scale(0.3); opacity: 0.9; }
+            100% { transform: translate(-28px, -36px) scale(1.6); opacity: 0; }
         }
 
-        /* Padded container for Train so smoke puffs never get cut off at top */
         .train-track-wrapper {
             position: relative;
             width: 100%;
-            padding-top: 36px; /* High top clearance for smoke puffs */
-            padding-bottom: 2px;
+            padding-top: 42px; /* High clearance for smoke puffs */
+            padding-bottom: 4px;
         }
 
         .train-track {
             position: relative;
             width: 100%;
-            height: 20px;
-            border-bottom: 2px dashed rgba(255, 255, 255, 0.4);
+            height: 18px;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.45);
         }
 
         .toy-train-container {
@@ -181,11 +195,11 @@
 
         .steam-bubble {
             position: absolute;
-            top: -2px;
+            top: 2px;
             left: 80px;
             width: 11px;
             height: 11px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 50%;
             animation: steamPuff 1.5s ease-out infinite;
             pointer-events: none;
@@ -196,93 +210,95 @@
             left: 84px;
         }
 
-        /* Custom Scrollbar */
+        /* Scrollbars */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.35); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.4); border-radius: 10px; }
     </style>
 </head>
 <body class="sky-morning font-sans min-h-screen transition-colors duration-1000 relative flex flex-col">
 
-    <!-- TOP TOY TRAIN TRACK & ANIMATION (PADDED TO PREVENT CLIPPING) -->
+    <!-- TOP TOY TRAIN TRACK & ANIMATION -->
     <div class="w-full overflow-hidden z-20 train-track-wrapper">
         <div class="train-track">
             <div id="toyTrain" class="toy-train-container flex items-center gap-1 group" title="Click for Choo-Choo!">
-                <!-- Steam Puffs -->
+                <!-- Smoke Puffs -->
                 <div class="steam-bubble"></div>
                 <div class="steam-bubble steam-bubble-2"></div>
 
-                <!-- Toy Engine & Cars (SVG) -->
+                <!-- Train Engine SVG -->
                 <svg width="110" height="34" viewBox="0 0 110 34" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-md transition-transform group-hover:scale-105">
                     <!-- Locomotive Engine -->
-                    <rect x="55" y="10" width="35" height="18" rx="3" fill="#f43f5e" />
+                    <rect x="55" y="10" width="35" height="18" rx="3" fill="#ef4444" />
                     <rect x="75" y="4" width="18" height="24" rx="3" fill="#3b82f6" />
                     <rect x="60" y="2" width="6" height="8" fill="#eab308" />
                     <circle cx="84" cy="11" r="4" fill="#fbbf24" />
                     <rect x="90" y="14" width="6" height="14" fill="#10b981" />
                     <!-- Wheels -->
-                    <circle cx="63" cy="28" r="4" fill="#1e293b" />
-                    <circle cx="75" cy="28" r="4" fill="#1e293b" />
-                    <circle cx="87" cy="28" r="4" fill="#1e293b" />
+                    <circle cx="63" cy="28" r="4" fill="#0f172a" />
+                    <circle cx="75" cy="28" r="4" fill="#0f172a" />
+                    <circle cx="87" cy="28" r="4" fill="#0f172a" />
                     
                     <!-- Wagon 1 -->
                     <rect x="28" y="14" width="22" height="14" rx="2" fill="#8b5cf6" />
-                    <circle cx="33" cy="28" r="3.5" fill="#1e293b" />
-                    <circle cx="45" cy="28" r="3.5" fill="#1e293b" />
-                    <path d="M 50 21 L 55 21" stroke="#94a3b8" stroke-width="2" />
+                    <circle cx="33" cy="28" r="3.5" fill="#0f172a" />
+                    <circle cx="45" cy="28" r="3.5" fill="#0f172a" />
+                    <path d="M 50 21 L 55 21" stroke="#cbd5e1" stroke-width="2" />
 
                     <!-- Wagon 2 -->
                     <rect x="2" y="14" width="22" height="14" rx="2" fill="#10b981" />
-                    <circle cx="7" cy="28" r="3.5" fill="#1e293b" />
-                    <circle cx="19" cy="28" r="3.5" fill="#1e293b" />
-                    <path d="M 24 21 L 28 21" stroke="#94a3b8" stroke-width="2" />
+                    <circle cx="7" cy="28" r="3.5" fill="#0f172a" />
+                    <circle cx="19" cy="28" r="3.5" fill="#0f172a" />
+                    <path d="M 24 21 L 28 21" stroke="#cbd5e1" stroke-width="2" />
                 </svg>
             </div>
         </div>
     </div>
 
-    <!-- MAIN APP WRAPPER -->
+    <!-- MAIN APP CONTAINER -->
     <div class="relative z-10 flex flex-col flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
-        <!-- HEADER WITH DYNAMIC HIGH-CONTRAST TEXT & GLASS BACKDROP -->
-        <header class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
-            <div class="glass-header-badge px-5 py-3 rounded-2xl flex items-center gap-3.5 text-center sm:text-left transition-colors duration-500">
-                <div id="trainLogo" class="w-11 h-11 rounded-xl bg-white/30 dark:bg-slate-800/40 flex items-center justify-center text-indigo-600 dark:text-indigo-300 text-xl shadow-sm cursor-pointer hover:rotate-12 transition-transform">
+        <!-- HEADER WITH DYNAMIC HIGH-CONTRAST TEXT & PROTECTIVE CAPSULE -->
+        <header class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+            <div class="glass-header-badge px-6 py-3.5 rounded-2xl flex items-center gap-4 text-center sm:text-left transition-colors duration-500">
+                <div id="trainLogo" class="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-xl shadow-md cursor-pointer hover:rotate-12 transition-transform">
                     <i class="fa-solid fa-train"></i>
                 </div>
                 <div>
                     <h1 class="font-play text-2xl sm:text-3xl font-bold tracking-wide dynamic-text-main">
                         Imagination Station
                     </h1>
-                    <p class="text-xs font-semibold dynamic-text-muted" id="timeGreeting">
-                        Welcome to your playground of canvases
+                    <p class="text-xs font-semibold dynamic-text-sub" id="timeGreeting">
+                        Playground for self-contained & hosted web pages
                     </p>
                 </div>
             </div>
 
-            <!-- Header Action Controls -->
+            <!-- Action Controls -->
             <div class="flex items-center gap-2">
-                <button id="addCanvasBtn" class="px-4 py-2.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold text-xs shadow-md hover:opacity-90 transition-all flex items-center gap-2">
+                <button id="addCanvasBtn" class="px-4 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg transition-all flex items-center gap-2">
                     <i class="fa-solid fa-plus"></i>
                     <span>New Canvas</span>
                 </button>
-                <button id="exportBtn" class="p-2.5 rounded-2xl glass-clean hover:bg-white/40 dark:hover:bg-slate-800/60 transition-all text-xs dynamic-text-main" title="Export / Import">
+                <button id="exportBtn" class="p-2.5 rounded-2xl glass-pill-container hover:opacity-90 transition-all text-xs dynamic-text-main" title="Export / Import">
                     <i class="fa-solid fa-arrows-rotate"></i>
                 </button>
             </div>
         </header>
 
-        <!-- SUBDUE & MINIMAL SEARCH / TAG FILTER TOOLBAR -->
+        <!-- SUBDUE TOOLBAR WITH CONTRAST-PROTECTED SEARCH & TAGS -->
         <section class="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6">
-            <!-- Sleek Unobtrusive Search Trigger Input -->
-            <div class="relative w-full sm:w-64">
-                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-xs opacity-60 dynamic-text-main"></i>
-                <input type="text" id="searchInput" placeholder="Search pages..." class="w-full pl-9 pr-3 py-1.5 rounded-xl bg-white/20 dark:bg-slate-900/20 border border-white/30 dark:border-slate-700/30 text-xs focus:outline-none focus:bg-white/40 dark:focus:bg-slate-900/40 transition-all placeholder-slate-700 dark:placeholder-slate-300 font-medium dynamic-text-main">
+            <!-- Search Bar with Solid Backdrop Protection -->
+            <div class="relative w-full sm:w-72">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-xs opacity-70 dynamic-text-main"></i>
+                <input type="text" id="searchInput" placeholder="Search title, tag or URL..." class="glass-input w-full pl-9 pr-3 py-2 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold placeholder-slate-500 dark:placeholder-slate-400">
             </div>
 
-            <!-- Minimal Pill Tags -->
-            <div id="tagFilterContainer" class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto py-1 scrollbar-none">
-                <!-- Tags dynamically rendered here -->
+            <!-- Minimal Tag Pills inside Protected Container -->
+            <div class="glass-pill-container px-2 py-1.5 rounded-xl flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto scrollbar-none">
+                <div id="tagFilterContainer" class="flex items-center gap-1.5">
+                    <!-- Dynamic tag buttons -->
+                </div>
             </div>
         </section>
 
@@ -292,112 +308,144 @@
         </main>
 
         <!-- EMPTY STATE -->
-        <div id="emptyState" class="hidden flex-col items-center justify-center py-16 text-center glass-clean rounded-3xl">
-            <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-500 text-2xl mb-3">
+        <div id="emptyState" class="hidden flex-col items-center justify-center py-16 text-center glass-card rounded-3xl">
+            <div class="w-14 h-14 rounded-2xl bg-indigo-600/10 flex items-center justify-center text-indigo-600 text-2xl mb-3">
                 <i class="fa-solid fa-cubes"></i>
             </div>
-            <h3 class="font-play text-lg font-bold mb-1 dynamic-text-main">Your Station is Clear</h3>
-            <p class="text-xs font-medium max-w-xs mb-5 dynamic-text-muted">Start by adding a new interactive HTML snippet or creative canvas page.</p>
-            <button id="emptyAddBtn" class="px-4 py-2 rounded-xl bg-indigo-600 text-white font-medium text-xs shadow-sm hover:bg-indigo-500 transition-all">
-                Add Canvas
+            <h3 class="font-play text-lg font-bold mb-1 dynamic-text-main">No Canvases Found</h3>
+            <p class="text-xs font-semibold max-w-xs mb-5 dynamic-text-sub">Add a hosted website URL or paste a self-contained HTML page snippet.</p>
+            <button id="emptyAddBtn" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-xs shadow-md hover:bg-indigo-500 transition-all">
+                Add Your First Web Page
             </button>
         </div>
 
-        <!-- FOOTER -->
-        <footer class="mt-auto py-4 text-center text-[11px] font-semibold opacity-80 flex items-center justify-between border-t border-white/20 dark:border-slate-800 dynamic-text-muted">
-            <span>Imagination Station</span>
-            <button id="resetSamplesBtn" class="hover:underline opacity-90">Restore Starter Canvases</button>
+        <!-- FOOTER WITH PROTECTED BACKDROP -->
+        <footer class="mt-auto py-3 px-4 rounded-xl glass-pill-container text-center text-xs font-bold flex items-center justify-between dynamic-text-sub">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-sparkles text-amber-500"></i>
+                <span>Imagination Station</span>
+            </div>
+            <button id="resetSamplesBtn" class="hover:underline opacity-90 text-[11px]">Restore Starter Canvases</button>
         </footer>
     </div>
 
     <!-- FULLSCREEN INTERACTIVE VIEWPORT MODAL -->
-    <div id="viewportModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xl hidden flex-col transition-all duration-300 opacity-0 scale-95">
+    <div id="viewportModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl hidden flex-col transition-all duration-300 opacity-0 scale-95">
         <!-- Viewport Header -->
         <div class="flex items-center justify-between px-5 py-3 bg-slate-900 border-b border-slate-800 text-white">
             <div class="flex items-center gap-3">
-                <button id="modalCloseBtn" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all text-sm flex items-center gap-2 px-3">
+                <button id="modalCloseBtn" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white transition-all text-xs font-bold flex items-center gap-2 px-3">
                     <i class="fa-solid fa-arrow-left"></i>
-                    <span class="text-xs font-semibold">Back</span>
+                    <span>Back</span>
                 </button>
                 <div>
-                    <h2 id="modalTitle" class="font-play font-bold text-sm leading-tight">Canvas Viewport</h2>
-                    <span id="modalTags" class="text-[10px] text-indigo-400">#tag</span>
+                    <div class="flex items-center gap-2">
+                        <h2 id="modalTitle" class="font-play font-bold text-sm leading-tight">Canvas Viewport</h2>
+                        <span id="modalTypeBadge" class="text-[9px] font-extrabold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">HTML</span>
+                    </div>
+                    <span id="modalTags" class="text-[10px] text-slate-400">#tag</span>
                 </div>
             </div>
 
             <div class="flex items-center gap-2">
-                <button id="modalPrevBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
-                <button id="modalNextBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs" title="Next"><i class="fa-solid fa-chevron-right"></i></button>
-                <button id="modalExternalBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs ml-2" title="Open External"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+                <button id="modalReloadBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs" title="Reload Frame"><i class="fa-solid fa-rotate-right"></i></button>
+                <button id="modalPrevBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs" title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="modalNextBtn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs" title="Next"><i class="fa-solid fa-chevron-right"></i></button>
+                <button id="modalExternalBtn" class="p-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold ml-2 flex items-center gap-1.5" title="Open External Tab">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span class="hidden sm:inline">Open</span>
+                </button>
             </div>
         </div>
 
         <!-- Fullscreen Frame -->
         <div class="flex-1 w-full h-full relative bg-white">
-            <iframe id="modalIframe" class="w-full h-full border-none" sandbox="allow-scripts allow-same-origin allow-forms allow-modals"></iframe>
+            <iframe id="modalIframe" class="w-full h-full border-none" sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups"></iframe>
         </div>
     </div>
 
-    <!-- ADD / EDIT CANVAS MODAL -->
-    <div id="addModal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-md hidden items-center justify-center p-4">
-        <div class="glass-clean bg-white/95 dark:bg-slate-900/95 rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-white/40 dark:border-slate-800">
-            <div class="flex items-center justify-between mb-4">
-                <h3 id="modalHeading" class="font-play text-lg font-bold">Add Web Canvas</h3>
-                <button id="closeAddModalBtn" class="text-slate-400 hover:text-slate-600 text-base"><i class="fa-solid fa-xmark"></i></button>
+    <!-- ADD / EDIT CANVAS MODAL WITH URL & HTML SUPPORT -->
+    <div id="addModal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-card bg-slate-900/95 text-white rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-slate-700/60 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+                <div>
+                    <h3 id="modalHeading" class="font-play text-lg font-bold">Add Web Canvas</h3>
+                    <p class="text-[11px] text-slate-400">Add hosted URL or self-contained HTML page</p>
+                </div>
+                <button id="closeAddModalBtn" class="text-slate-400 hover:text-white text-base"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <form id="addSiteForm" class="space-y-4">
                 <input type="hidden" id="editSiteId" value="">
 
                 <div>
-                    <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 text-slate-500">Title</label>
-                    <input type="text" id="inputTitle" required placeholder="e.g., Kinetic Particle Toy" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
+                    <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 text-slate-300">Title</label>
+                    <input type="text" id="inputTitle" required placeholder="e.g., Kinetic Particle Simulation" class="w-full px-3.5 py-2 rounded-xl bg-slate-800 text-white border border-slate-700 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
                 </div>
 
                 <div>
-                    <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 text-slate-500">Tags (comma separated)</label>
-                    <input type="text" id="inputTags" placeholder="Art, Game, Sound" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
+                    <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 text-slate-300">Tags (comma separated)</label>
+                    <input type="text" id="inputTags" placeholder="Art, Game, Utility" class="w-full px-3.5 py-2 rounded-xl bg-slate-800 text-white border border-slate-700 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
                 </div>
 
+                <!-- URL INPUT SECTION WITH FETCH PROXY -->
+                <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-slate-800 space-y-2">
+                    <label class="block text-[10px] font-bold uppercase tracking-wider text-indigo-400">
+                        <i class="fa-solid fa-globe mr-1"></i> Hosted Web URL (Optional)
+                    </label>
+                    <div class="flex gap-2">
+                        <input type="url" id="inputUrl" placeholder="https://my-app.vercel.app" class="flex-1 px-3 py-1.5 rounded-xl bg-slate-900 text-white border border-slate-700 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <button type="button" id="fetchRemoteBtn" class="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold flex items-center gap-1.5 whitespace-nowrap">
+                            <i class="fa-solid fa-cloud-arrow-down"></i>
+                            <span>Fetch HTML</span>
+                        </button>
+                    </div>
+                    <p class="text-[10px] text-slate-400">Supply a public URL to embed directly, or click <b>Fetch HTML</b> to pull code into a local self-contained snippet.</p>
+                </div>
+
+                <!-- HTML CODE SNIPPET -->
                 <div>
-                    <label class="block text-[10px] font-bold uppercase tracking-wider mb-1 text-slate-500">HTML Code Snippet</label>
-                    <textarea id="inputCode" rows="6" placeholder="<!DOCTYPE html>&#10;<html>&#10;<body>&#10;  <h1>Hello World</h1>&#10;</body>&#10;</html>" class="w-full p-3 font-mono text-xs rounded-xl bg-slate-950 text-emerald-400 border border-slate-800 focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-300">Self-Contained HTML Code</label>
+                        <span id="fetchStatus" class="text-[10px] font-semibold text-emerald-400 hidden"><i class="fa-solid fa-check mr-1"></i> HTML Imported</span>
+                    </div>
+                    <textarea id="inputCode" rows="6" placeholder="<!DOCTYPE html>&#10;<html>&#10;<body>&#10;  <h1>My Interactive Page</h1>&#10;</body>&#10;</html>" class="w-full p-3 font-mono text-xs rounded-xl bg-slate-950 text-emerald-400 border border-slate-800 focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
                 </div>
 
-                <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
-                    <button type="button" id="cancelAddBtn" class="px-4 py-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 text-xs font-semibold">Cancel</button>
-                    <button type="submit" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs shadow-md">Save Canvas</button>
+                <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+                    <button type="button" id="cancelAddBtn" class="px-4 py-2 rounded-xl hover:bg-slate-800 text-slate-300 text-xs font-semibold">Cancel</button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md">Save Canvas</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- BACKUP / RESTORE MODAL -->
-    <div id="backupModal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-md hidden items-center justify-center p-4">
-        <div class="glass-clean bg-white/95 dark:bg-slate-900/95 rounded-3xl p-6 max-w-sm w-full shadow-2xl">
-            <div class="flex items-center justify-between mb-4">
+    <div id="backupModal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-card bg-slate-900 text-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border border-slate-800">
+            <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
                 <h3 class="font-play text-base font-bold">Data Management</h3>
-                <button id="closeBackupBtn" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+                <button id="closeBackupBtn" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="space-y-3">
-                <button id="exportJsonBtn" class="w-full py-2.5 rounded-xl bg-indigo-600 text-white font-medium text-xs flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-download"></i> Export JSON
+                <button id="exportJsonBtn" class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-solid fa-download"></i> Export JSON Library
                 </button>
                 <input type="file" id="importJsonInput" accept=".json" class="hidden">
-                <button id="triggerImportBtn" class="w-full py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-xs font-medium flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-upload"></i> Restore JSON File
+                <button id="triggerImportBtn" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-upload"></i> Restore JSON Backup
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT APP LOGIC -->
+    <!-- JAVASCRIPT APP ENGINE -->
     <script>
         /**
-         * Imagination Station - Main Logic
+         * Imagination Station Application Logic
          */
 
-        // Web Audio Whistle & Chug Sound Effects
+        // Web Audio Whistle & Pop Effects
         class TrainAudioEngine {
             constructor() { this.ctx = null; }
             init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); }
@@ -406,7 +454,6 @@
                 try {
                     this.init();
                     const now = this.ctx.currentTime;
-                    // Dual pitch train whistle
                     [587.33, 739.99].forEach(freq => {
                         const osc = this.ctx.createOscillator();
                         const gain = this.ctx.createGain();
@@ -429,7 +476,7 @@
                     const gain = this.ctx.createGain();
                     osc.frequency.setValueAtTime(400, this.ctx.currentTime);
                     osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.05);
-                    gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+                    gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
                     osc.connect(gain);
                     gain.connect(this.ctx.destination);
@@ -441,29 +488,32 @@
 
         const audio = new TrainAudioEngine();
 
-        // Sample Starter Interactive Pages
+        // Starter Default Canvases
         const STARTER_CANVASES = [
             {
                 id: 'canvas-1',
-                title: 'Kinetic Particle Toy',
+                title: 'Kinetic Particle Silk',
                 tags: ['Art', 'Physics'],
+                url: '',
                 code: `<!DOCTYPE html><html><body class="m-0 bg-slate-950 overflow-hidden"><canvas id="c"></canvas><script>const c=document.getElementById("c"),x=c.getContext("2d");let p=[];function r(){c.width=window.innerWidth;c.height=window.innerHeight}window.onresize=r;r();window.onmousemove=e=>{for(let i=0;i<4;i++)p.push({x:e.clientX,y:e.clientY,vx:(Math.random()-0.5)*5,vy:(Math.random()-0.5)*5,s:Math.random()*6+2,c:\`hsl(\${Math.random()*360},100%,70%)\`,l:1})};function a(){x.fillStyle="rgba(2,6,23,0.15)";x.fillRect(0,0,c.width,c.height);p.forEach((o,i)=>{o.x+=o.vx;o.y+=o.vy;o.l-=0.02;x.beginPath();x.arc(o.x,o.y,Math.max(0,o.s*o.l),0,Math.PI*2);x.fillStyle=o.c;x.fill();if(o.l<=0)p.splice(i,1)});requestAnimationFrame(a)}a();<\/script></body></html>`,
                 dateAdded: 'Starter'
             },
             {
                 id: 'canvas-2',
-                title: 'Pentatonic Music Matrix',
-                tags: ['Sound', 'Interactive'],
-                code: `<!DOCTYPE html><html><head><script src="https://cdn.tailwindcss.com"><\/script></head><body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-4"><div class="grid grid-cols-4 gap-2.5 p-4 bg-slate-800 rounded-2xl shadow-2xl" id="g"></div><script>const f=[261.6,293.6,329.6,392,440,523.2,587.3,659.2,783.9,880,1046.5,1174.6];const ctx=new(window.AudioContext||window.webkitAudioContext)();f.forEach(n=>{const b=document.createElement("button");b.className="w-12 h-12 rounded-xl bg-indigo-600/40 hover:bg-indigo-500 transition-all active:scale-90 border border-indigo-400/30";b.onclick=()=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=n;g.gain.setValueAtTime(0.2,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.6);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.61);};document.getElementById("g").appendChild(b);});<\/script></body></html>`,
+                title: 'Pentatonic Synth Grid',
+                tags: ['Sound', 'Music'],
+                url: '',
+                code: `<!DOCTYPE html><html><head><script src="https://cdn.tailwindcss.com"><\/script></head><body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-4"><div class="grid grid-cols-4 gap-3 p-5 bg-slate-800/90 rounded-2xl shadow-2xl border border-slate-700" id="g"></div><script>const f=[261.6,293.6,329.6,392,440,523.2,587.3,659.2,783.9,880,1046.5,1174.6];const ctx=new(window.AudioContext||window.webkitAudioContext)();f.forEach(n=>{const b=document.createElement("button");b.className="w-12 h-12 rounded-xl bg-indigo-600/40 hover:bg-indigo-500 transition-all active:scale-90 border border-indigo-400/30 shadow-md";b.onclick=()=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=n;g.gain.setValueAtTime(0.2,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.6);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+0.61);};document.getElementById("g").appendChild(b);});<\/script></body></html>`,
                 dateAdded: 'Starter'
             },
             {
                 id: 'canvas-3',
                 title: 'Zen Ripple Pond',
                 tags: ['Zen', 'Relax'],
-                code: `<!DOCTYPE html><html><body class="m-0 bg-teal-950 overflow-hidden"><canvas id="c"></canvas><script>const c=document.getElementById("c"),x=c.getContext("2d");let r=[];function resize(){c.width=window.innerWidth;c.height=window.innerHeight}window.onresize=resize;resize();window.onclick=e=>{r.push({x:e.clientX,y:e.clientY,rad:0,a:1})};function draw(){x.fillStyle="#042f2e";x.fillRect(0,0,c.width,c.height);r.forEach((p,i)=>{p.rad+=1.8;p.a-=0.012;x.beginPath();x.arc(p.x,p.y,p.rad,0,Math.PI*2);x.strokeStyle=\`rgba(153,246,228,\${p.a})\`;x.lineWidth=2;x.stroke();if(p.a<=0)r.splice(i,1)});requestAnimationFrame(draw)}draw();<\/script></body></html>`,
+                url: '',
+                code: `<!DOCTYPE html><html><body class="m-0 bg-teal-950 overflow-hidden"><canvas id="c"></canvas><script>const c=document.getElementById("c"),x=c.getContext("2d");let r=[];function resize(){c.width=window.innerWidth;c.height=window.innerHeight}window.onresize=resize;resize();window.onclick=e=>{r.push({x:e.clientX,y:e.clientY,rad:0,a:1})};function draw(){x.fillStyle="#042f2e";x.fillRect(0,0,c.width,c.height);r.forEach((p,i)=>{p.rad+=1.8;p.a-=0.012;x.beginPath();x.arc(p.x,p.y,p.rad,0,Math.PI*2);x.strokeStyle=\`rgba(153,246,228,\${p.a})\`;x.lineWidth=2.5;x.stroke();if(p.a<=0)r.splice(i,1)});requestAnimationFrame(draw)}draw();<\/script></body></html>`,
                 dateAdded: 'Starter'
-            },
+            }
         ];
 
         // State Store
@@ -483,17 +533,20 @@
             timeGreeting: document.getElementById('timeGreeting'),
             toyTrain: document.getElementById('toyTrain'),
             trainLogo: document.getElementById('trainLogo'),
-            // Viewport
+            // Viewport Modal
             viewportModal: document.getElementById('viewportModal'),
             modalIframe: document.getElementById('modalIframe'),
             modalTitle: document.getElementById('modalTitle'),
             modalTags: document.getElementById('modalTags'),
+            modalTypeBadge: document.getElementById('modalTypeBadge'),
             modalCloseBtn: document.getElementById('modalCloseBtn'),
+            modalReloadBtn: document.getElementById('modalReloadBtn'),
             modalPrevBtn: document.getElementById('modalPrevBtn'),
             modalNextBtn: document.getElementById('modalNextBtn'),
             modalExternalBtn: document.getElementById('modalExternalBtn'),
-            // Add/Edit
+            // Add/Edit Modal
             addModal: document.getElementById('addModal'),
+            modalHeading: document.getElementById('modalHeading'),
             addCanvasBtn: document.getElementById('addCanvasBtn'),
             emptyAddBtn: document.getElementById('emptyAddBtn'),
             closeAddModalBtn: document.getElementById('closeAddModalBtn'),
@@ -501,7 +554,10 @@
             addSiteForm: document.getElementById('addSiteForm'),
             inputTitle: document.getElementById('inputTitle'),
             inputTags: document.getElementById('inputTags'),
+            inputUrl: document.getElementById('inputUrl'),
             inputCode: document.getElementById('inputCode'),
+            fetchRemoteBtn: document.getElementById('fetchRemoteBtn'),
+            fetchStatus: document.getElementById('fetchStatus'),
             // Backup
             exportBtn: document.getElementById('exportBtn'),
             backupModal: document.getElementById('backupModal'),
@@ -518,7 +574,7 @@
             const hours = now.getHours();
             const body = document.body;
 
-            body.classList.remove('sky-dawn', 'sky-morning', 'sky-midday', 'sky-sunset', 'sky-dusk', 'sky-night', 'sky-dark');
+            body.classList.remove('sky-dawn', 'sky-morning', 'sky-midday', 'sky-sunset', 'sky-dusk', 'sky-night');
 
             let greeting = '';
             if (hours >= 5 && hours < 8) {
@@ -534,10 +590,10 @@
                 body.classList.add('sky-sunset');
                 greeting = 'Golden hour of imagination';
             } else if (hours >= 20 && hours < 22) {
-                body.classList.add('sky-dusk', 'sky-dark');
+                body.classList.add('sky-dusk');
                 greeting = 'Peaceful evening sanctuary';
             } else {
-                body.classList.add('sky-night', 'sky-dark');
+                body.classList.add('sky-night');
                 greeting = 'Night time spark of magic';
             }
 
@@ -546,7 +602,7 @@
 
         // --- STORAGE ---
         function loadStorage() {
-            const saved = localStorage.getItem('imagination_station_canvases');
+            const saved = localStorage.getItem('imagination_station_canvases_v2');
             if (saved) {
                 try { state.websites = JSON.parse(saved); }
                 catch(e) { state.websites = [...STARTER_CANVASES]; }
@@ -557,11 +613,11 @@
         }
 
         function saveStorage() {
-            localStorage.setItem('imagination_station_canvases', JSON.stringify(state.websites));
+            localStorage.setItem('imagination_station_canvases_v2', JSON.stringify(state.websites));
             render();
         }
 
-        // --- RENDER ---
+        // --- RENDER ENGINE ---
         function render() {
             renderTags();
             renderCards();
@@ -575,12 +631,12 @@
             allTags.forEach(tag => {
                 const isSelected = state.selectedTag === tag;
                 const btn = document.createElement('button');
-                btn.className = `px-2.5 py-1 rounded-lg text-[11px] font-medium whitespace-nowrap transition-all ${
+                btn.className = `px-3 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-all ${
                     isSelected 
-                        ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-xs' 
-                        : 'bg-white/20 dark:bg-slate-800/30 hover:bg-white/40'
+                        ? 'bg-indigo-600 text-white shadow-sm' 
+                        : 'bg-black/10 dark:bg-white/10 hover:bg-black/20 dark:hover:bg-white/20 dynamic-text-main'
                 }`;
-                btn.textContent = tag === 'ALL' ? 'All' : `#${tag.toLowerCase()}`;
+                btn.textContent = tag === 'ALL' ? 'All Canvases' : `#${tag.toLowerCase()}`;
                 btn.onclick = () => {
                     audio.playPop();
                     state.selectedTag = tag;
@@ -595,6 +651,7 @@
                 const matchesTag = state.selectedTag === 'ALL' || site.tags?.some(t => t.toUpperCase() === state.selectedTag);
                 const matchesSearch = !state.searchQuery || 
                     site.title.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                    site.url?.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
                     site.tags?.some(t => t.toLowerCase().includes(state.searchQuery.toLowerCase()));
                 return matchesTag && matchesSearch;
             });
@@ -617,19 +674,33 @@
 
             filtered.forEach((site, index) => {
                 const card = document.createElement('div');
-                card.className = "glass-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer relative shadow-sm";
+                card.className = "glass-card rounded-2xl overflow-hidden flex flex-col group cursor-pointer relative";
                 
-                const iframeSrc = `data:text/html;charset=utf-8,${encodeURIComponent(site.code || '')}`;
+                // Determine preview source (Direct URL or Encoded HTML)
+                let iframeSrc = '';
+                let isRemote = false;
+
+                if (site.url && site.url.trim().length > 0 && !site.code) {
+                    iframeSrc = site.url;
+                    isRemote = true;
+                } else {
+                    iframeSrc = `data:text/html;charset=utf-8,${encodeURIComponent(site.code || '<html><body><p>No content</p></body></html>')}`;
+                }
 
                 card.innerHTML = `
-                    <div class="h-40 w-full bg-slate-900/40 relative overflow-hidden border-b border-white/20 dark:border-slate-800">
+                    <div class="h-40 w-full bg-slate-950/40 relative overflow-hidden border-b border-black/10 dark:border-white/10">
                         <div class="iframe-container">
                             <iframe class="iframe-scaler" src="${iframeSrc}" loading="lazy"></iframe>
                         </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-indigo-500/10 transition-colors"></div>
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/30 backdrop-blur-xs">
-                            <span class="px-3 py-1.5 rounded-xl bg-white text-slate-900 font-bold text-xs shadow-md">
-                                Launch Canvas
+                        <div class="absolute inset-0 bg-transparent group-hover:bg-indigo-600/10 transition-colors"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/40 backdrop-blur-xs">
+                            <span class="px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold text-xs shadow-lg flex items-center gap-1.5">
+                                <i class="fa-solid fa-expand"></i> Launch Canvas
+                            </span>
+                        </div>
+                        <div class="absolute top-2.5 left-2.5">
+                            <span class="px-2 py-0.5 rounded-md text-[9px] font-extrabold uppercase tracking-wider bg-slate-900/80 text-white backdrop-blur-md border border-white/20 shadow-xs">
+                                ${isRemote ? '<i class="fa-solid fa-globe mr-1 text-sky-400"></i> URL' : '<i class="fa-solid fa-code mr-1 text-emerald-400"></i> HTML'}
                             </span>
                         </div>
                     </div>
@@ -637,13 +708,17 @@
                     <div class="p-4 flex flex-col flex-1 justify-between">
                         <div>
                             <div class="flex items-start justify-between gap-2 mb-1">
-                                <h3 class="font-play font-bold text-sm line-clamp-1">${escapeHTML(site.title)}</h3>
+                                <h3 class="font-play font-bold text-sm leading-snug dynamic-text-main line-clamp-1">${escapeHTML(site.title)}</h3>
                                 <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button class="edit-btn p-1 text-slate-400 hover:text-indigo-600 text-xs" title="Edit"><i class="fa-solid fa-pen"></i></button>
                                     <button class="delete-btn p-1 text-slate-400 hover:text-red-500 text-xs" title="Delete"><i class="fa-solid fa-trash"></i></button>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap gap-1 mb-2">
-                                ${(site.tags || []).map(t => `<span class="px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 font-medium text-[10px]">#${escapeHTML(t)}</span>`).join('')}
+
+                            ${site.url ? `<p class="text-[10px] font-medium text-indigo-600 dark:text-indigo-300 truncate mb-2 opacity-90"><i class="fa-solid fa-link mr-1"></i>${escapeHTML(site.url)}</p>` : ''}
+
+                            <div class="flex flex-wrap gap-1 mt-1">
+                                ${(site.tags || []).map(t => `<span class="px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 font-bold text-[10px]">#${escapeHTML(t)}</span>`).join('')}
                             </div>
                         </div>
                     </div>
@@ -655,11 +730,58 @@
                         deleteSite(site.id);
                         return;
                     }
+                    if (e.target.closest('.edit-btn')) {
+                        e.stopPropagation();
+                        openEditModal(site);
+                        return;
+                    }
                     openViewport(index);
                 };
 
                 DOM.cardsContainer.appendChild(card);
             });
+        }
+
+        // --- REMOTE HTML FETCH PROXY ENGINE ---
+        async function fetchRemoteHtml() {
+            const url = DOM.inputUrl.value.trim();
+            if (!url) {
+                alert('Please enter a Web URL first.');
+                return;
+            }
+
+            DOM.fetchRemoteBtn.disabled = true;
+            DOM.fetchRemoteBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Fetching...`;
+            DOM.fetchStatus.classList.add('hidden');
+
+            try {
+                // Try direct fetch first
+                let response = null;
+                let htmlText = '';
+
+                try {
+                    response = await fetch(url);
+                    if (response.ok) htmlText = await response.text();
+                } catch(err) {
+                    // Fallback to CORS Proxies
+                    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+                    response = await fetch(proxyUrl);
+                    if (response.ok) htmlText = await response.text();
+                }
+
+                if (htmlText) {
+                    DOM.inputCode.value = htmlText;
+                    DOM.fetchStatus.classList.remove('hidden');
+                    audio.playPop();
+                } else {
+                    alert('Could not fetch HTML directly. The site will be stored as an Iframe Web URL.');
+                }
+            } catch(e) {
+                alert('Could not fetch remote HTML due to cross-origin policies. The site will load via URL frame instead.');
+            } finally {
+                DOM.fetchRemoteBtn.disabled = false;
+                DOM.fetchRemoteBtn.innerHTML = `<i class="fa-solid fa-cloud-arrow-down"></i> <span>Fetch HTML</span>`;
+            }
         }
 
         // --- FULLSCREEN VIEWPORT ENGINE ---
@@ -675,7 +797,15 @@
             DOM.modalTitle.textContent = site.title;
             DOM.modalTags.textContent = (site.tags || []).map(t => `#${t}`).join(' ');
 
-            DOM.modalIframe.srcdoc = site.code;
+            if (site.url && site.url.trim().length > 0 && !site.code) {
+                DOM.modalTypeBadge.textContent = 'HOSTED URL';
+                DOM.modalIframe.src = site.url;
+                DOM.modalIframe.removeAttribute('srcdoc');
+            } else {
+                DOM.modalTypeBadge.textContent = 'SELF-CONTAINED';
+                DOM.modalIframe.removeAttribute('src');
+                DOM.modalIframe.srcdoc = site.code || '<html><body>No Code</body></html>';
+            }
 
             DOM.viewportModal.classList.remove('hidden');
             setTimeout(() => {
@@ -689,7 +819,20 @@
             setTimeout(() => {
                 DOM.viewportModal.classList.add('hidden');
                 DOM.modalIframe.srcdoc = '';
+                DOM.modalIframe.src = 'about:blank';
             }, 250);
+        }
+
+        function reloadViewport() {
+            const filtered = getFilteredWebsites();
+            const site = filtered[state.activeViewportIndex];
+            if (site) {
+                if (site.url && !site.code) {
+                    DOM.modalIframe.src = site.url;
+                } else {
+                    DOM.modalIframe.srcdoc = site.code;
+                }
+            }
         }
 
         function navigateViewport(dir) {
@@ -703,10 +846,26 @@
         // --- MODAL & FORM HANDLERS ---
         function openAddModal() {
             audio.playPop();
+            DOM.modalHeading.textContent = 'Add Web Canvas';
             document.getElementById('editSiteId').value = '';
             DOM.inputTitle.value = '';
             DOM.inputTags.value = '';
+            DOM.inputUrl.value = '';
             DOM.inputCode.value = '';
+            DOM.fetchStatus.classList.add('hidden');
+            DOM.addModal.classList.remove('hidden');
+            DOM.addModal.classList.add('flex');
+        }
+
+        function openEditModal(site) {
+            audio.playPop();
+            DOM.modalHeading.textContent = 'Edit Canvas';
+            document.getElementById('editSiteId').value = site.id;
+            DOM.inputTitle.value = site.title || '';
+            DOM.inputTags.value = (site.tags || []).join(', ');
+            DOM.inputUrl.value = site.url || '';
+            DOM.inputCode.value = site.code || '';
+            DOM.fetchStatus.classList.add('hidden');
             DOM.addModal.classList.remove('hidden');
             DOM.addModal.classList.add('flex');
         }
@@ -718,24 +877,34 @@
 
         function saveSiteForm(e) {
             e.preventDefault();
+            const editId = document.getElementById('editSiteId').value;
             const title = DOM.inputTitle.value.trim();
             const tags = DOM.inputTags.value.split(',').map(t => t.trim()).filter(Boolean);
+            const url = DOM.inputUrl.value.trim();
             const code = DOM.inputCode.value.trim();
 
-            if (!code) {
-                alert('Please enter HTML code.');
+            if (!url && !code) {
+                alert('Please enter either a Web URL or an HTML Code snippet.');
                 return;
             }
 
-            const newSite = {
-                id: 'canvas-' + Date.now(),
-                title,
-                tags,
-                code,
-                dateAdded: new Date().toLocaleDateString()
-            };
+            if (editId) {
+                const index = state.websites.findIndex(s => s.id === editId);
+                if (index !== -1) {
+                    state.websites[index] = { ...state.websites[index], title, tags, url, code };
+                }
+            } else {
+                const newSite = {
+                    id: 'canvas-' + Date.now(),
+                    title,
+                    tags,
+                    url,
+                    code,
+                    dateAdded: new Date().toLocaleDateString()
+                };
+                state.websites.unshift(newSite);
+            }
 
-            state.websites.unshift(newSite);
             saveStorage();
             closeAddModal();
         }
@@ -752,7 +921,7 @@
             return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
         }
 
-        // --- INITIALIZATION & EVENTS ---
+        // --- INITIALIZATION ---
         window.onload = function() {
             updateTimeSky();
             loadStorage();
@@ -767,22 +936,28 @@
                 renderCards();
             };
 
-            // Buttons & Modal Actions
+            // Buttons & Modal Handlers
             DOM.addCanvasBtn.onclick = openAddModal;
             DOM.emptyAddBtn.onclick = openAddModal;
             DOM.closeAddModalBtn.onclick = closeAddModal;
             DOM.cancelAddBtn.onclick = closeAddModal;
             DOM.addSiteForm.onsubmit = saveSiteForm;
+            DOM.fetchRemoteBtn.onclick = fetchRemoteHtml;
 
             DOM.modalCloseBtn.onclick = closeViewport;
+            DOM.modalReloadBtn.onclick = reloadViewport;
             DOM.modalPrevBtn.onclick = () => navigateViewport(-1);
             DOM.modalNextBtn.onclick = () => navigateViewport(1);
             DOM.modalExternalBtn.onclick = () => {
                 const filtered = getFilteredWebsites();
                 const site = filtered[state.activeViewportIndex];
                 if (site) {
-                    const blob = new Blob([site.code || ''], { type: 'text/html' });
-                    window.open(URL.createObjectURL(blob), '_blank');
+                    if (site.url) {
+                        window.open(site.url, '_blank');
+                    } else {
+                        const blob = new Blob([site.code || ''], { type: 'text/html' });
+                        window.open(URL.createObjectURL(blob), '_blank');
+                    }
                 }
             };
 
@@ -812,14 +987,14 @@
                         state.websites = JSON.parse(event.target.result);
                         saveStorage();
                         DOM.backupModal.classList.add('hidden');
-                    } catch(err) { alert('Invalid file'); }
+                    } catch(err) { alert('Invalid backup file'); }
                 };
                 reader.readAsText(file);
             };
 
             DOM.resetSamplesBtn.onclick = () => {
-                if (confirm('Restore starter canvases?')) {
-                    localStorage.removeItem('imagination_station_canvases');
+                if (confirm('Restore default starter canvases?')) {
+                    localStorage.removeItem('imagination_station_canvases_v2');
                     loadStorage();
                 }
             };
